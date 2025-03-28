@@ -137,6 +137,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: VisionOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -285,7 +298,13 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Hyena_death_0: -8478427711171593115
+      Hyena_death_1: 4094097513583266264
+      Hyena_death_2: -8494239873324995667
+      Hyena_death_3: -7052074958541673759
+      Hyena_death_4: -4013674126291260509
+      Hyena_death_5: -6475305636212064967
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
