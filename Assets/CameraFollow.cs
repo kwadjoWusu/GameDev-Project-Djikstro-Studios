@@ -1,19 +1,17 @@
 using UnityEngine;
 
+//Tracking the target
 public class CameraFollow : MonoBehaviour
 {
-    public Transform player; // Reference to the player's Transform
-    public float smoothSpeed = 5f; // Speed of camera smoothing
-    public Vector3 offset; // Offset from the player position
+    private float speed;
+    private float currentPosX;
+    private Vector3 velocity = Vector3.zero;
 
-    void LateUpdate()
+    private void Update()
     {
-        if (player == null) return; // Ensure player exists
-
-        // Target position for the camera
-        Vector3 targetPosition = player.position + offset;
-
         // Smoothly move the camera to the target position
-        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.deltaTime);
+        transform.position = Vector3.SmoothDamp(transform.position, new Vector3(currentPosX,transform.position.y,transform.position.z),
+            ref velocity, speed * Time.deltaTime);
     }
+    
 }
