@@ -1241,9 +1241,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4baba7e8620d4e8689869d7f4273303, type: 3}
+  m_Script: {fileID: 11500000, guid: b3f3278813259b44b8b6340649ae9663, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 68967547}
+  laziness: 10
+  lookAtTarget: 1
+  takeOffsetFromInitialPos: 1
+  generalOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &595200601
 GameObject:
   m_ObjectHideFlags: 0
