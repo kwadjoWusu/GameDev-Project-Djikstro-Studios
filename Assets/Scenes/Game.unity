@@ -253,6 +253,9 @@ MonoBehaviour:
   animator: {fileID: 90557651}
   moveSpeed: 8.5
   horizontalMovement: 0
+  dashSpeed: 20
+  dashDuration: 0.1
+  dashCooldown: 0.1
   jumpPower: 12
   maxJumps: 2
   groundCheck: {fileID: 1420446331}
@@ -383,6 +386,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 9c7d9f58-4815-4090-a3d0-f53bbef87af8
     m_ActionName: 'Player/Hold[/Keyboard/e]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 90557644}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6a5ff86b-6075-402f-b478-bc22baff29e3
+    m_ActionName: 'Player/Dash[/Keyboard/q,/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
