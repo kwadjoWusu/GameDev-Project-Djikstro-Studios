@@ -104,6 +104,7 @@ public class Enemy : MonoBehaviour
             {
                 InstantiateLoot(lootItem.itemPrefab);
             } 
+            break;
         }
         Destroy(gameObject);
     }

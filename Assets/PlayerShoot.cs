@@ -15,21 +15,11 @@ public class PlayerShoot : MonoBehaviour
 
     void Shoot()
     {
-        // Convert screen position to world position (with z=0 for 2D)
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = -Camera.main.transform.position.z;
-        Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 shootDirection = (mousePosition - transform.position).normalized;
 
-        // Use Vector2 for 2D direction calculation
-        Vector2 shootDirection = (mouseWorldPos - (Vector2)transform.position).normalized;
-
-        // Instantiate the bullet
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-
-        // Apply velocity
-        bullet.GetComponent<Rigidbody2D>().linearVelocity = shootDirection * bulletSpeed;
-
-        // Destroy after delay
-        Destroy(bullet, 2f);
+        bullet.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(shootDirection.x, shootDirection.y) * bulletSpeed; // Adjust speed as needed
+        Destroy(bullet, 2f); // Destroy the bullet after 2 seconds
     }
 }
