@@ -35,7 +35,7 @@
                 {
                     "name": "Dash",
                     "type": "Button",
-                    "id": "d6069b89-a451-4243-86f0-4bd5906ac427",
+                    "id": "7327db5d-50b4-4c42-81f2-f1bdf479663d",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -44,7 +44,7 @@
                 {
                     "name": "Drop",
                     "type": "Button",
-                    "id": "221369df-8869-42ea-8308-eaaa7f7cd33f",
+                    "id": "f28321b5-6248-4622-a081-9d58cf3d9d3f",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -186,7 +186,7 @@
                 },
                 {
                     "name": "",
-                    "id": "2aa07158-2ae0-4d79-a947-f29a3e7bd51e",
+                    "id": "7e4ca8fe-6fc2-40dd-a9fb-ca59e1df97f3",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
@@ -197,7 +197,7 @@
                 },
                 {
                     "name": "",
-                    "id": "51900529-576b-4a91-98d6-82d9ee328c41",
+                    "id": "18d80c65-a24c-4cac-ba40-b8b874224383",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
@@ -208,7 +208,7 @@
                 },
                 {
                     "name": "",
-                    "id": "cbba3843-cfc5-4668-a510-9aa78d7d0996",
+                    "id": "c61eef1f-bc3f-43f9-b891-410626073f5a",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -219,7 +219,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f1b9328a-cbe9-4d1a-89a4-56222d16f6e1",
+                    "id": "ce948e29-f290-4608-9407-a9a479b7b1d4",
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",

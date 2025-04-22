@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
     bool isFacingRight = true;
+
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float horizontalMovement;
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jumping")]
     public float jumpPower = 10f;
     public int maxJumps = 2;
-    private int jumpsRemaining;
+    public int jumpsRemaining;
     private bool hasUsedWallJump = false;
 
     [Header("Ground Check")]
@@ -34,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 groundCheckRadius = new Vector2(0.49f, 0.03f);
     public LayerMask groundLayer;
     bool isGrounded;
-     bool isOnPlatform;
+    bool isOnPlatform;
 
     [Header("Wall Check")]
     public Transform wallCheck;
@@ -79,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
+
         GroundCheck();
         Gravity();
         CheckWallTouch();
@@ -189,16 +191,17 @@ public class PlayerMovement : MonoBehaviour
 
         float dashDirection = isFacingRight ? 1f:-1f;
 
-        rb.linearVelocity = new Vector2(dashDirection * dashSpeed,rb.linearVelocity.y);//Dash movement
+        rb.linearVelocity = new Vector2(dashDirection * dashSpeed,rb.linearVelocity.y); //Dash movement
 
         yield return new WaitForSeconds(dashDuration);
 
         rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);//Reset horizontal velocity
 
+    
         isDashing=false;
         trailRenderer.emitting=false;
-        Physics2D.IgnoreLayerCollision(8,9,false);
 
+        Physics2D.IgnoreLayerCollision(8,9,false);
 
         yield return new WaitForSeconds(dashCooldown);
         canDash= true;
