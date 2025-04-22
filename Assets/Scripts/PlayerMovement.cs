@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public ParticleSystem smokeFX;
+    public ParticleSystem speedFX;
     public Rigidbody2D rb;
     public Animator animator;
     bool isFacingRight = true;
@@ -14,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float horizontalMovement;
+    float speedMultiplier = 1f;
+
     BoxCollider2D playerCollider;
 
     [Header("Dashing")]
@@ -65,9 +68,22 @@ public class PlayerMovement : MonoBehaviour
         trailRenderer = GetComponent<TrailRenderer>();
         jumpsRemaining = maxJumps;
         playerCollider= GetComponent<BoxCollider2D>();
+        SpeedItem.OnSpeedCollected += StartSpeedBoost;
 
     }
+void StartSpeedBoost(float multiplier){
+    StartCoroutine(SpeedBoostCoroutine(multiplier));
 
+}
+
+
+private IEnumerator SpeedBoostCoroutine(float multiplier){
+    speedMultiplier = multiplier;
+    speedFX.Play();
+    yield return new WaitForSeconds(2f);
+    speedMultiplier = 1f;
+    speedFX.Stop();
+}
 
     void Update()
     {
@@ -92,10 +108,10 @@ public class PlayerMovement : MonoBehaviour
             // During wall jump, let the WallJump method control movement
             WallJump();
         }
-        else
+        if (!isWallJumping)
         {
             // Normal movement
-            rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed * speedMultiplier, rb.linearVelocity.y);
             Flip();
         }
 
@@ -310,6 +326,9 @@ public class PlayerMovement : MonoBehaviour
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
+            speedFX.transform.localScale = theScale;
+
+
             if (rb.linearVelocity.y == 0)
             {
                 smokeFX.Play();
