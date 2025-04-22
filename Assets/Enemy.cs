@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
     {
         currentHealth -= damage;
         StartCoroutine(FlashWhite());
-        if(currentHealth <= 0)
+        if(currentHealth <- 0)
         {
             Die();
         }

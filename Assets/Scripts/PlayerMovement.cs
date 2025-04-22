@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Net.Mime;
 using UnityEngine;
 using UnityEngine.AI;
@@ -6,7 +7,6 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public ParticleSystem smokeFX;
-    public ParticleSystem speedFX;
     public Rigidbody2D rb;
     public Animator animator;
     bool isFacingRight = true;
@@ -14,8 +14,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 5f;
     public float horizontalMovement;
-    float speedMultiplier = 1f;
-
     BoxCollider2D playerCollider;
 
     [Header("Dashing")]
@@ -38,23 +36,6 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     bool isGrounded;
     bool isOnPlatform;
-
-    public Rigidbody2D rb;
-    public Animator animator;
-    bool isFacingRight = true;
-    [Header("Movement")]
-    public float moveSpeed = 5f;
-    public float horizontalMovement;
-    [Header("Jumping")]
-    public float jumpPower = 10f;
-    public int maxJumps = 2;
-    public int jumpsRemaining;
-
-    [Header("Ground Check")]
-    public Transform groundCheck;
-    public Vector2 groundCheckRadius = new Vector2(0.49f, 0.03f);
-    public LayerMask groundLayer;
-    bool isGrounded;
 
     [Header("Wall Check")]
     public Transform wallCheck;
@@ -84,22 +65,9 @@ public class PlayerMovement : MonoBehaviour
         trailRenderer = GetComponent<TrailRenderer>();
         jumpsRemaining = maxJumps;
         playerCollider= GetComponent<BoxCollider2D>();
-        SpeedItem.OnSpeedCollected += StartSpeedBoost;
 
     }
-void StartSpeedBoost(float multiplier){
-    StartCoroutine(SpeedBoostCoroutine(multiplier));
 
-}
-
-
-private IEnumerator SpeedBoostCoroutine(float multiplier){
-    speedMultiplier = multiplier;
-    speedFX.Play();
-    yield return new WaitForSeconds(2f);
-    speedMultiplier = 1f;
-    speedFX.Stop();
-}
 
     void Update()
     {
@@ -124,10 +92,10 @@ private IEnumerator SpeedBoostCoroutine(float multiplier){
             // During wall jump, let the WallJump method control movement
             WallJump();
         }
-        if (!isWallJumping)
+        else
         {
             // Normal movement
-            rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed * speedMultiplier, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
             Flip();
         }
 
@@ -137,37 +105,6 @@ private IEnumerator SpeedBoostCoroutine(float multiplier){
             wallJumpCooldown -= Time.deltaTime;
         }
 
-    }
-
-    private void Gravity()
-    {
-        if (rb.linearVelocity.y < 0)
-        {
-
-    void Update()
-    {
-        GroundCheck();
-        Gravity();
-        CheckWallTouch();
-        WallSlide();
-
-        // Handle movement and wall jumping
-        if (isWallJumping)
-        {
-            // During wall jump, let the WallJump method control movement
-            WallJump();
-        }
-        else
-        {
-            // Normal movement
-            rb.linearVelocity = new Vector2(horizontalMovement * moveSpeed, rb.linearVelocity.y);
-            Flip();
-        }
-
-        // Update animations
-        animator.SetFloat("yVelocity", rb.linearVelocity.y);
-        animator.SetFloat("magnitude", rb.linearVelocity.magnitude);
-        animator.SetBool("isWallSliding", isWallSliding);
     }
 
     private void Gravity()
@@ -308,10 +245,6 @@ private IEnumerator SpeedBoostCoroutine(float multiplier){
     {
         // Wall Jump logic - completely separate from regular jumps
         if (context.performed && isWallSliding && wallJumpCooldown <= 0)
-    public void Jump(InputAction.CallbackContext context)
-    {
-        // Wall Jump logic - completely separate from regular jumps
-        if (context.performed && isWallSliding)
         {
             // Execute wall jump
             isWallJumping = true;
@@ -377,9 +310,6 @@ private IEnumerator SpeedBoostCoroutine(float multiplier){
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
-            speedFX.transform.localScale = theScale;
-
-
             if (rb.linearVelocity.y == 0)
             {
                 smokeFX.Play();
