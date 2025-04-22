@@ -29,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
         if (enemy)
         {
             TakeDamage(enemy.damage);
+            SoundEffectManager.Play("PlayerHit");
         }
         Trap trap = collision.GetComponent<Trap>();
         if (trap && trap.damage > 0)

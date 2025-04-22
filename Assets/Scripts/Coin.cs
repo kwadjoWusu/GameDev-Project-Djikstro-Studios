@@ -12,6 +12,7 @@ public class Coin : MonoBehaviour, IItem
         {
             isCollected = true;
             OnCoinCollect?.Invoke(worth);
+            SoundEffectManager.Play("Gem");
             Destroy(gameObject);
         }
         
