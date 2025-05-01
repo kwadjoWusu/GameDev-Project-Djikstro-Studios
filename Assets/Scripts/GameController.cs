@@ -30,15 +30,14 @@ public class GameController : MonoBehaviour
     }
 
     void GameOverScreen()
-    {   
+    {
         gameOverScreen.SetActive(true);
         survivedText.text = "YOU SURVIVED " + survivedLevelsCount + " LEVEL";
-        if(survivedLevelsCount != 1)
+        if (survivedLevelsCount != 1)
         {
             survivedText.text += "S";
         }
         Time.timeScale = 0;
-
     }
 
     public void ResetGame()
@@ -46,7 +45,13 @@ public class GameController : MonoBehaviour
         gameOverScreen.SetActive(false);
         survivedLevelsCount = 0;
         LoadLevel(0, false);
-        OnReset.Invoke();
+
+        // Safety check before invoking the event
+        if (OnReset != null)
+        {
+            OnReset.Invoke();
+        }
+
         Time.timeScale = 1;
     }
 
@@ -56,10 +61,10 @@ public class GameController : MonoBehaviour
 
         levels[currentLevelIndex].gameObject.SetActive(false);
         levels[level].gameObject.SetActive(true);
-        player.transform.position = new Vector3(29.1f, -9, 0);
+        player.transform.position = new Vector3(-11.9f, -5.25f, 0);
         currentLevelIndex = level;
         numberOfCoins = 0;
-        if(wantSurvivedIncreas) survivedLevelsCount++;
+        if (wantSurvivedIncreas) survivedLevelsCount++;
     }
 
     void Update()
@@ -95,5 +100,14 @@ public class GameController : MonoBehaviour
         loadCanvas.SetActive(true);
         Debug.Log("Player reached level end!");
         // You could automatically transition after a delay, or keep your hold-to-load mechanism
+    }
+
+    // Clean up event handlers when the GameController is destroyed
+    private void OnDestroy()
+    {
+        // Unsubscribe from events
+        Coin.OnCoinCollect -= IncreaseCoinAmount;
+        HoldToLoadLevel.OnHoldComplete -= LoadNextLevel;
+        PlayerHealth.OnPlayerDied -= GameOverScreen;
     }
 }
